@@ -12,6 +12,8 @@ public class CopyOfSee_Me  implements PlugIn {
 		
 		ImagePlus image = IJ.openImage("http://imagej.net/images/clown.jpg");
 		image.show();
+		IJ.log("hey clown!");
+
 	}
 }	
 
