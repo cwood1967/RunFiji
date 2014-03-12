@@ -5,3 +5,5 @@
 jars
 plugins
 *~
+/target
+/pug_a/target/
