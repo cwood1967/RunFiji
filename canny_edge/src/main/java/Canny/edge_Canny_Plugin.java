@@ -6,6 +6,9 @@ import ij.gui.GenericDialog;
 import ij.plugin.filter.PlugInFilter;
 import ij.process.ImageProcessor;
 
+/***
+This plugin implements the Canny Edge detection algorithm
+ ***/
 public class edge_Canny_Plugin implements PlugInFilter {
 
 	ImagePlus im;
