@@ -24,6 +24,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<imagej.app.directory>${rootdir}</imagej.app.directory>
 		<delete.other.versions>true</delete.other.versions>
+		<bio-formats.groupId>ome</bio-formats.groupId>
+        <bio-formats.version>5.0.0</bio-formats.version>
 	</properties>
 
 	<dependencies>
@@ -42,6 +44,21 @@
 			<groupId>sc.fiji</groupId>
 			<artifactId>fiji-compat</artifactId>
 			<version>2.0.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>${bio-formats.groupId}</groupId>
+			<artifactId>bio-formats_plugins</artifactId>
+			<version>${bio-formats.version}</version>
+			<scope>runtime</scope>
+			<!-- NB: Bio-Formats 5.0.0 erroneously depends on the obsolete
+			         gov.nih.imagej:imagej artifact, which causes a name
+			         clash with net.imagej:ij. So we exclude it. -->
+			<exclusions>
+				<exclusion>
+					<groupId>gov.nih.imagej</groupId>
+					<artifactId>imagej</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 	</dependencies>
 
@@ -118,5 +135,6 @@
 	<modules>
 		<module>pug_a</module>
 		<module>canny_edge</module>
+		<module>bleachWindow</module>
 	</modules>
 </project>
