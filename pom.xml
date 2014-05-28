@@ -136,5 +136,6 @@
 		<module>pug_a</module>
 		<module>canny_edge</module>
 		<module>bleachWindow</module>
+		<module>sliceMean</module>
 	</modules>
 </project>
