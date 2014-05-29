@@ -67,9 +67,9 @@ public class Head {
 			}
 
 			double endTime = 0.001 * (new java.util.Date().getTime());
-			r.close();
+			
 			float allmax = 0;
-			for (Future<Float> m : resultList) {
+			for (Future<Float> m : m_resultList) {
                 try {
 				if (m.get() > allmax) {
 					allmax = m.get();
@@ -80,7 +80,8 @@ public class Head {
                 }
 //				System.out.println(m);
 			}
-			System.out.println(resultList.size() + " " + allmax + " "
+			r.close();
+			System.out.println(m_resultList.size() + " " + allmax + " "
 					+ (endTime - startTime));
 		}
 
@@ -133,10 +134,11 @@ public class Head {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		String filepath = "/Volumes/projects/smc/public/LIA/08222013/out.tif";
+//		String filepath = "/Volumes/projects/smc/public/LIA/08222013/out.tif";
+		String filepath = "/home/chris/flybrain-g.tif";
 		boolean MULTITHREAD = true;
 //		boolean MULTITHREAD = false;
-		int imax = 50;
+		int imax = 10;
 		if (args.length == 3) {
 			if (args[0].compareTo("-m") == 0) {
 				MULTITHREAD = true;
