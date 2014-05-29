@@ -5,9 +5,9 @@
     <artifactId>ft_p</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>canny_edge</artifactId>
+  <artifactId>SliceMean</artifactId>
   <name>SliceMean</name>
-  <description>Plugin for canny edge detector</description>
+  <description>Plugin to calculate the mean of each slice for large image</description>
   	<build>
 		<plugins>
 			<!-- <plugin>
