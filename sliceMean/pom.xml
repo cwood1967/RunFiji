@@ -5,8 +5,8 @@
     <artifactId>ft_p</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>SliceMean</artifactId>
-  <name>SliceMean</name>
+  <artifactId>slice_Mean</artifactId>
+  <name>slice_Mean</name>
   <description>Plugin to calculate the mean of each slice for large image</description>
   	<build>
 		<plugins>

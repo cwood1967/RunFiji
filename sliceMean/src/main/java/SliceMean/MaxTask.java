@@ -1,8 +1,10 @@
 package SliceMean;
 
+import java.util.concurrent.Callable;
 import java.util.concurrent.RecursiveTask;
 import java.util.List;
 import java.util.LinkedList;
+import java.util.ArrayList;
 
 import clojure.lang.IMapEntry;
 import ij.IJ;
@@ -15,56 +17,34 @@ import loci.formats.ChannelSeparator;
 import loci.plugins.util.ImageProcessorReader;
 import loci.plugins.util.LociPrefs;
 
-public class MaxTask extends RecursiveTask<Float> {
+public class MaxTask implements Callable<Float> {
 
 	private ImageProcessorReader r = null;
-	private ImageProcessor ip = null;
-	
-	int slice;
-	int nx;
-	int ny;
-	int nz;
-	int nt;
-	int nc;
-	int nSlices;
-	
+	ImageProcessor ip = null;
+
 	String DimOrder;
-	
-	public MaxTask(ImageProcessorReader r, int slice) {
+	int num;
+
+	public MaxTask(ImageProcessor ip) {
 		super();
-		this.r = r;
-		this.slice = slice;
-		nx = r.getSizeX();
-		ny = r.getSizeY();
-		nz = r.getSizeZ();
-		nt = r.getSizeT();
-		nc = r.getSizeC();
-		nSlices = nt*nz*nc;
-		DimOrder = r.getDimensionOrder();
+		this.ip = ip;
 	}
+
 	@Override
-	protected Float compute() {
-	
-		try {
-			ip = r.openProcessors(slice)[0];
-		} catch (Exception e) {
-			e.printStackTrace();
-			return -1.1f;
-		}
-		ip = ip.convertToFloat();
-		float[] pixels = (float[]) ip.getPixels();
+	public Float call() {
+		long count = 0;
+		float allmax = 0.0f;
 		float max = 0.f;
+		
+		ip = ip.convertToFloat();
+		float[] pixels = (float[])ip.getPixels();
 		for (int j = 0; j < pixels.length; j++) {
 			if (pixels[j] > max) {
 				max = pixels[j];
 			}
 		}
-
-		pixels = null;
+		
 		return max;
 	}
-	
-	
-	
-	
+
 }
