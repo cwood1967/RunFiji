@@ -36,11 +36,17 @@ public class MaxTask implements Callable<Float> {
 		float allmax = 0.0f;
 		float max = 0.f;
 		
-		ip = ip.convertToFloat();
-		float[] pixels = (float[])ip.getPixels();
-		for (int j = 0; j < pixels.length; j++) {
-			if (pixels[j] > max) {
-				max = pixels[j];
+		//ip = ip.convertToFloat();
+		short[] pixels = (short[])ip.getPixels();
+		float[] fpix = new float[pixels.length];
+		
+		for (int k = 0; k < pixels.length; k++) {
+			fpix[k] = pixels[k]&0xffff;
+		}
+		
+		for (int j = 0; j < fpix.length; j++) {
+			if (fpix[j] > max) {
+				max =fpix[j];
 			}
 		}
 		

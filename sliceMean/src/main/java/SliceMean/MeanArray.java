@@ -41,13 +41,17 @@ public class MeanArray extends RecursiveTask<Double> {
 			for (int i = 0; i < size; i++) {
 				array[i] = r.nextGaussian();
 			}
-
+			
 			MeanArray task = new MeanArray(array,0);
 			task.fork();
 			total = task.join();
 		}
 
 		else {
+			double[] a2 = new double[size];
+			for (int i = 0; i < size; i++) {
+				a2[i] = array[i];
+			}
 			for (int j = 0; j < array.length; j++) {
 				total += array[j];
 			}

@@ -162,15 +162,21 @@ public class Head {
 			ImageProcessor ip;
 
 			ip = stack.getProcessor(i + 1);
-			ip = ip.convertToFloat();
-			float[] pixels = (float[]) ip.getPixels();
+			//ip = ip.convertToFloat();
+			short[] pixels = (short[]) ip.getPixels();
+			float[] fpix = new float[pixels.length];
+			
 			float max = 0.f;
-			for (int j = 0; j < pixels.length; j++) {
-				if (pixels[j] > max) {
-					max = pixels[j];
+			for (int k = 0; k < pixels.length; k++) {
+				fpix[k] = pixels[k]&0xffff;
+			}
+			
+			for (int j = 0; j < fpix.length; j++) {
+				if (fpix[j] > max) {
+					max = fpix[j];
 				}
 			}
-
+			
 			pixels = null;
 			resultList.add(max);
 		}

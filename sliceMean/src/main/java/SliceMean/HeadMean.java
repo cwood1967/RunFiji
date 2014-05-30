@@ -23,17 +23,17 @@ import loci.plugins.util.LociPrefs;
 
 public class HeadMean {
 
-	
 	ArrayList<Future<Double>> m_resultList = null;
 	ArrayList<Double> resultList = null;
 	int imax = 100;
 	int arraysize = 100000;
 	double meanValue;
 	
+	double time;
 	private boolean MULTITHREAD;
 	ExecutorService executor = null;
+
 	// ImageProcessorReader r = null;
-	
 
 	public HeadMean(int imax, int arraysize) {
 		// TODO Auto-generated constructor stub
@@ -41,10 +41,8 @@ public class HeadMean {
 		this.arraysize = arraysize;
 	}
 
-	
 	public void run() {
 
-		
 		m_resultList = new ArrayList<Future<Double>>();
 		resultList = new ArrayList<Double>();
 
@@ -72,7 +70,7 @@ public class HeadMean {
 				}
 				meanValue = mtm;
 				System.out.println("Max value :" + mtm);
-//				executor.shutdown();
+				// executor.shutdown();
 			} else {
 				double allmax = 0f;
 				for (Double f : resultList) {
@@ -89,15 +87,14 @@ public class HeadMean {
 		System.out.println("Stop");
 		double endTime = 0.001 * (new java.util.Date().getTime());
 		System.out.println("Time " + (endTime - startTime));
-		
+		time = endTime - startTime;
+
 		// }
 		//
 		// catch (Exception e) {
 		// e.printStackTrace();
 		// }
 	}
-
-	
 
 	private void process_single() {
 
@@ -106,24 +103,28 @@ public class HeadMean {
 			double total = 0.f;
 			double[] array = new double[arraysize];
 			Random r = new Random();
-			
+
 			for (int j = 0; j < arraysize; j++) {
 				array[j] = r.nextGaussian();
+			}
+			double[] a2 = new double[arraysize];
+			for (int j = 0; j < arraysize; j++) {
+				a2[j] = array[j];
 			}
 			for (int j = 0; j < arraysize; j++) {
 				total += array[j];
 			}
 
-			resultList.add(total/imax);
+			resultList.add(total / imax);
 		}
 	}
 
 	public void process_multi() {
 
 		final ForkJoinPool pool = new ForkJoinPool();
-//		executor = Executors.newCachedThreadPool();
+		// executor = Executors.newCachedThreadPool();
 		for (int i = 0; i < imax; i++) {
-			MeanArray task = new MeanArray(null,arraysize);
+			MeanArray task = new MeanArray(null, arraysize);
 			m_resultList.add(pool.submit(task));
 		}
 	}
@@ -134,7 +135,7 @@ public class HeadMean {
 		String filepath = "/Users/cjw/Desktop/test.tif";
 		// String filepath = "/home/chris/flybrain-g.tif";
 		boolean MULTITHREAD = true;
-//		 boolean MULTITHREAD = false;
+		// boolean MULTITHREAD = false;
 		int imax = 100;
 		int arraysize = 1000000;
 		if (args.length == 3) {
@@ -160,7 +161,7 @@ public class HeadMean {
 	public void setIMAX(int imax) {
 		this.imax = imax;
 	}
-	
+
 	public void setMULTITHREAD(boolean mULTITHREAD) {
 		MULTITHREAD = mULTITHREAD;
 	}
@@ -168,7 +169,12 @@ public class HeadMean {
 	public double getMeanValue() {
 		return meanValue;
 	}
+
 	public List<Double> getResult() {
 		return resultList;
+	}
+	
+	public double getTime() {
+		return time;
 	}
 }
