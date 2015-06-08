@@ -8,7 +8,7 @@
 	<parent>
 		<groupId>sc.fiji</groupId>
 		<artifactId>pom-fiji</artifactId>
-		<version>2.0.0-SNAPSHOT</version>
+		<version>6.1.1-SNAPSHOT</version>
 	</parent>
 
 	<name>My Test Plugins</name>
@@ -22,27 +22,20 @@
 		<imagej.app.directory>${rootdir}</imagej.app.directory>
 		<delete.other.versions>true</delete.other.versions>
 		<bio-formats.groupId>ome</bio-formats.groupId>
-		<bio-formats.version>5.0.2</bio-formats.version>
+		<bio-formats.version>5.0.6</bio-formats.version>
 	</properties>
 
 	<dependencies>
-		<dependency>
-			<groupId>net.imagej</groupId>
-			<artifactId>ij</artifactId>
-			<version>${imagej1.version}</version>
-		</dependency>
+		<!-- <dependency> <groupId>net.imagej</groupId> <artifactId>ij</artifactId> 
+			<version>${imagej1.version}</version> </dependency> -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>3.8.1</version>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>sc.fiji</groupId>
-			<artifactId>fiji-compat</artifactId>
-			<version>2.0.0-SNAPSHOT</version>
-		</dependency>
-		
+		<!-- <dependency> <groupId>sc.fiji</groupId> <artifactId>fiji-compat</artifactId> 
+			<version>2.0.1-SNAPSHOT</version> </dependency> -->
 		<dependency>
 			<groupId>org.clojure</groupId>
 			<artifactId>clojure</artifactId>
